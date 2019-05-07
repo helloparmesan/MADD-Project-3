@@ -18,12 +18,12 @@ class Leaf {
   }
 
   void show() {
-    fill(random(255),random(255),random(255));
+    fill(79,188,62);
     stroke(50,50,200);
     pushMatrix();
     translate(pos.x, pos.y, pos.z);
     //sphere(4);
-    ellipse(0,0, 10, 4);
+    ellipse(0,0, 5, 2);
     popMatrix();
   }
 }
