@@ -9,7 +9,7 @@ class Leaf {
 
   Leaf() {
     pos = PVector.random3D();
-    pos.mult(random(width/2));
+    pos.mult(random(width/4));
     pos.y -= height/4;
   }
 
@@ -19,7 +19,7 @@ class Leaf {
 
   void show() {
     fill(79,188,62);
-    stroke(50,50,200);
+    stroke(79,188,62);
     pushMatrix();
     translate(pos.x, pos.y, pos.z);
     //sphere(4);

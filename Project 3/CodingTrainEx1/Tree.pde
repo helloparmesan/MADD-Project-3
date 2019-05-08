@@ -98,7 +98,9 @@ class Tree {
     for (int i = 0; i < branches.size(); i++) {
       Branch b = branches.get(i);
       if (b.parent != null) {
-        float sw = map(i, 0, branches.size(), 3, 0);
+        float sw = map(i, 0, branches.size(), 8, 0);
+        //sw = 2.3 - log(10.001-sw);
+        sw = 0.5+0.014*sw*sw*sw;
         strokeWeight(sw);
         stroke(165,42,42);
         line(b.pos.x, b.pos.y, b.pos.z, b.parent.pos.x, b.parent.pos.y, b.parent.pos.z);
