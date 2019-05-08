@@ -6,6 +6,7 @@
 class Tree {
   ArrayList<Branch> branches = new ArrayList<Branch>();
   ArrayList<Leaf> leaves = new ArrayList<Leaf>();
+  float numberReached = 0;
 
   Tree() {
     for (int i = 0; i < 1000; i++) {
@@ -43,7 +44,10 @@ class Tree {
         PVector dir = PVector.sub(l.pos, b.pos);
         float d = dir.mag();
         if (d < min_dist) {
-          l.reached();
+          if (!l.reached) {
+            l.reached();
+            numberReached++;
+          }
           closest = null;
           break;
         } else if (d > max_dist) {
@@ -78,6 +82,9 @@ class Tree {
         branches.add(newB);
         b.reset();
       }
+    }
+    if (numberReached/leaves.size() > 0.9) {
+      setup();
     }
   }
 
