@@ -14,19 +14,22 @@ PeasyCam cam;
 Minim minim;
 AudioInput in;
 FFT fft;
+FFT fftLin;
+FFT fftLog;
 
 float min_dist = 5;
-float max_dist = 200;
+ float max_dist = 200;
 
 void setup() {
   //Create canvas and set framerate
-  size(1280, 720, P3D);
-  frameRate(10);
+  size(400, 400, P3D);
+  frameRate(60);
  
- //Start capturing Audio
+//Start capturing Audio
     minim = new Minim(this);
-  in = minim.getLineIn(Minim.STEREO, 512);
+    in = minim.getLineIn();
  // Create the Input stream
+ 
  
  
 // Develop 3-D Space
@@ -34,11 +37,11 @@ void setup() {
   cam.rotateY(random(radians(90)));
   cam.rotateZ(random(radians(-90)));
   tree = new Tree();
+   // Using the default capture device
 }
 
 
 void draw() {
-   
   background(51);
   cam.rotateY(radians(1));
   tree.show();
@@ -46,6 +49,7 @@ void draw() {
 
 }
 void mouseClicked() {
-       setup();
+  tree = new Tree();
   }
     
+ 

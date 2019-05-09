@@ -23,7 +23,7 @@ class Leaf {
     p += abs( in.mix.get( i ) ) * 1;
   }
   
-    fill(255*p, 255/p,255+p);
+    fill(255*p, 255/(1+p), 255);
     stroke(50,50,200);
     pushMatrix();
     translate(pos.x, pos.y, pos.z);
