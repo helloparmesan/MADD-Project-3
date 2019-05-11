@@ -18,12 +18,21 @@ class Leaf {
   }
 
   void show() {
-    fill(random(255),random(255),random(255));
+    float p = 0;
+    
+  for ( int i = 0; i < in.bufferSize(); i++ ) {
+    p += abs( in.mix.get( i ) ) * 1;
+    float m = map(p, 0, in.bufferSize(), 1, 255);
+    fill(255*sqrt(m), 255/sqrt(m), 255/sqrt(m));
+  }
+  
+    
     stroke(50,50,200);
     pushMatrix();
     translate(pos.x, pos.y, pos.z);
     //sphere(4);
-    ellipse(0,0, 10, 4);
+    float v = map(p, 0, in.bufferSize(), 0, 200);
+    ellipse(0,0, 10*sqrt(1+v), 4*sqrt(v));
     popMatrix();
   }
 }

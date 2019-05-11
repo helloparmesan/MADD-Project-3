@@ -6,9 +6,10 @@
 class Tree {
   ArrayList<Branch> branches = new ArrayList<Branch>();
   ArrayList<Leaf> leaves = new ArrayList<Leaf>();
+  float numberReached = 0;
 
   Tree() {
-    for (int i = 0; i < 2000; i++) {
+    for (int i = 0; i < 1000; i++) {
       leaves.add(new Leaf());
     }    
     Branch root = new Branch(new PVector(0,height/2), new PVector(0, -1));
@@ -43,7 +44,10 @@ class Tree {
         PVector dir = PVector.sub(l.pos, b.pos);
         float d = dir.mag();
         if (d < min_dist) {
-          l.reached();
+          if (!l.reached) {
+            l.reached();
+            numberReached++;
+          }
           closest = null;
           break;
         } else if (d > max_dist) {
@@ -59,13 +63,13 @@ class Tree {
         closest.count++;
       }
     }
-
+    /*
     for (int i = leaves.size()-1; i >= 0; i--) {
       if (leaves.get(i).reached) {
         leaves.remove(i);
       }
     }
-
+    */
     for (int i = branches.size()-1; i >= 0; i--) {
       Branch b = branches.get(i);
       if (b.count > 0) {
@@ -79,11 +83,14 @@ class Tree {
         b.reset();
       }
     }
+   
   }
 
   void show() {
     for (Leaf l : leaves) {
-      l.show();
+      if (l.reached) {
+        l.show();
+      }
     }    
     //for (Branch b : branches) {
     for (int i = 0; i < branches.size(); i++) {
@@ -91,9 +98,16 @@ class Tree {
       if (b.parent != null) {
         float sw = map(i, 0, branches.size(), 3, 0);
         strokeWeight(sw);
-        stroke(165,42,42);
+        //Change Branch color to audio
+          float p = 0;
+          for ( int j = 0; j < in.bufferSize(); j++ ) {
+              p += abs( in.mix.get( j ) ) * 1;
+          }
+         float v = map(p, 0, in.bufferSize(), 1, 255);
+         stroke(255/sqrt(v), 255*sqrt(v), 255/sqrt(v));
         line(b.pos.x, b.pos.y, b.pos.z, b.parent.pos.x, b.parent.pos.y, b.parent.pos.z);
+
+  }   
       }
     }
   }
-}
