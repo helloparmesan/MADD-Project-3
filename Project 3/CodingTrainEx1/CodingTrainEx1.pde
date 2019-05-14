@@ -12,7 +12,9 @@ Tree tree;
 //Initialize PeasyCam
 PeasyCam cam;
 Minim minim;
+//LiveInput in;
 AudioInput in;
+AudioOutput out;
 FFT fft;
 FFT fftLin;
 FFT fftLog;
@@ -27,14 +29,30 @@ void setup() {
 //Start capturing Audio
     minim = new Minim(this);
     in = minim.getLineIn();
+    /*
  // Create the Input stream
- 
- 
+    out = minim.getLineOut();
+  
+  // we ask for an input with the same audio properties as the output.
+  AudioStream inputStream = minim.getInputStream( out.getFormat().getChannels(), 
+                                                  out.bufferSize(), 
+                                                  out.sampleRate(), 
+                                                  out.getFormat().getSampleSizeInBits());
+                                                 
+  // construct a LiveInput by giving it an InputStream from minim.                                                  
+  in = new LiveInput( inputStream );
+  
+  // create granulate UGen so we can hear the input being modfied before it goes to the output
+  Delay myDelay = new Delay(0.25,0.5,false,false);
+  
+  // patch the input through the grain effect to the output
+  in.patch(myDelay).patch(out);
+  */
  
 // Develop 3-D Space
-  cam = new PeasyCam(this, 500);
-  cam.rotateY(random(radians(90)));
-  cam.rotateZ(random(radians(-90)));
+  cam = new PeasyCam(this, 700);
+  //cam.rotateY(random(radians(90)));
+  //cam.rotateZ(random(radians(90)));
   tree = new Tree();
    // Using the default capture device
 }
@@ -43,8 +61,12 @@ void setup() {
 void draw() {
   background(51);
   cam.rotateY(radians(1));
+  if (in.mix.level() < 0.01) {
+    tree.grow();
+  } else {
+    tree.shrink();
+  }
   tree.show();
-  tree.grow();
 
 }
 void mouseClicked() {
