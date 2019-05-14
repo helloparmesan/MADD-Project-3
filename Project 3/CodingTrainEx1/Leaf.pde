@@ -32,7 +32,7 @@ class Leaf {
     translate(pos.x, pos.y, pos.z);
     //sphere(4);
     float v = map(p, 0, in.bufferSize(), 0, 200);
-    ellipse(0,0, 10*sqrt(1+v), 4*sqrt(v));
+    ellipse(0,0, sqrt(10*v), sqrt(4*v));
     popMatrix();
   }
 }

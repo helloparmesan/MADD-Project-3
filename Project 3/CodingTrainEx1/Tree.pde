@@ -9,7 +9,7 @@ class Tree {
   float numberReached = 0;
 
   Tree() {
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 300; i++) {
       leaves.add(new Leaf());
     }    
     Branch root = new Branch(new PVector(0,height/2), new PVector(0, -1));

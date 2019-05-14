@@ -18,12 +18,11 @@ FFT fftLin;
 FFT fftLog;
 
 float min_dist = 5;
- float max_dist = 200;
+float max_dist = 200;
 
 void setup() {
   //Create canvas and set framerate
-  fullScreen(P3D);
-  frameRate(24);
+  size(600, 600, P3D);
  
 //Start capturing Audio
     minim = new Minim(this);
