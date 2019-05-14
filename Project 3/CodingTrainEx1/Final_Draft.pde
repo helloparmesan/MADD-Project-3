@@ -1,3 +1,4 @@
+/*
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -24,7 +25,7 @@ float max_dist = 200;
 
 void setup() {
   //Create canvas and set framerate
-  fullScreen(P3D);
+  size(600, 600, P3D);
  
 //Start capturing Audio
     minim = new Minim(this);
@@ -48,9 +49,9 @@ void setup() {
   // patch the input through the grain effect to the output
   in.patch(myDelay).patch(out);
   */
- 
+ /*
 // Develop 3-D Space
-  cam = new PeasyCam(this, height);
+  cam = new PeasyCam(this, 700);
   //cam.rotateY(random(radians(90)));
   //cam.rotateZ(random(radians(90)));
   tree = new Tree();
@@ -61,7 +62,7 @@ void setup() {
 void draw() {
   background(51);
   cam.rotateY(radians(1));
-  if (in.mix.level() < 0.02) {
+  if (in.mix.level() < 0.10) {
     tree.grow();
   } else {
     tree.shrink();
@@ -73,4 +74,4 @@ void mouseClicked() {
   tree = new Tree();
   }
     
- 
+ */

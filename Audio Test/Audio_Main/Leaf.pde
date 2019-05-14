@@ -9,7 +9,7 @@ class Leaf {
 
   Leaf() {
     pos = PVector.random3D();
-    pos.mult(random(width/4));
+    pos.mult(random(width/2));
     pos.y -= height/4;
   }
 
@@ -19,22 +19,16 @@ class Leaf {
 
   void show() {
     float p = 0;
-    
   for ( int i = 0; i < in.bufferSize(); i++ ) {
     p += abs( in.mix.get( i ) ) * 1;
-    float m = map(p, 0, in.bufferSize(), 1, 255);
-    fill(255*sqrt(m), 255/sqrt(m), 255/sqrt(m));
   }
   
-    
+    fill(255*p, 255/p,255+p);
     stroke(50,50,200);
     pushMatrix();
     translate(pos.x, pos.y, pos.z);
     //sphere(4);
-    float v = map(p, 0, in.bufferSize(), 0, 100);
-    //v = 10/v;
-    v = -1*(v - 4)*(v-4) + 30;
-    ellipse(0,0, sqrt(10*v), sqrt(4*v));
+    ellipse(0,0, 10, 4);
     popMatrix();
   }
 }
