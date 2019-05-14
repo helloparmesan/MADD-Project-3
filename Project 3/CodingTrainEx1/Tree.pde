@@ -85,6 +85,75 @@ class Tree {
     }
    
   }
+  
+  void shrink() {
+    for (int i = 0; i < branches.size()/20; i++) {
+      Branch b = branches.get(branches.size() - 1);
+      for (Leaf l : leaves) {
+        PVector dir = PVector.sub(l.pos, b.pos);
+        float d = dir.mag();
+        if (d < min_dist) {
+          if (l.reached) {
+            l.reached = false;
+            numberReached--;
+          }
+        }
+      }
+      if (b.parent != null) {
+        branches.remove(b);
+      }
+    }
+    /*
+    for (Leaf l : leaves) {
+      Branch closest = null;
+      PVector closestDir = null;
+      float record = -1;
+
+      for (Branch b : branches) {
+        PVector dir = PVector.sub(l.pos, b.pos);
+        float d = dir.mag();
+        if (d < min_dist) {
+          if (l.reached) {
+            l.reached = false;
+            numberReached--;
+          }
+          closest = b;
+          break;
+        } else if (d > max_dist) {
+        } else if (closest == null || d < record) {
+          closest = b;
+          closestDir = dir;
+          record = d;
+        }
+      }
+      if (closest != null && closest.parent != null) {
+        branches.remove(closest);
+      }
+    }
+    /*
+    for (int i = leaves.size()-1; i >= 0; i--) {
+      if (leaves.get(i).reached) {
+        leaves.remove(i);
+      }
+    }
+    */
+    /*
+    for (int i = branches.size()-1; i >= 0; i--) {
+      Branch b = branches.get(i);
+      if (b.count > 0) {
+        b.dir.div(b.count);
+        PVector rand = PVector.random2D();
+        rand.setMag(0.04);
+        b.dir.add(rand);
+        b.dir.normalize();
+        Branch newB = new Branch(b);
+        branches.add(newB);
+        b.reset();
+      }
+    }
+    */
+    
+  }
 
   void show() {
     for (Leaf l : leaves) {
